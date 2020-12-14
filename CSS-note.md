@@ -202,6 +202,122 @@ h2, p {color:gray;}
 
 
 
+## Style Properties
+
+### Colors
+
+* RGB表示 `color: rgb(100%, 0%, 0%); /* red */`
+* RGBA表示 A指的是透明度(transparency) `background-color: rgba(249, 163, 197, 0.5); /* pink */`
+
+* 16进制表示 `color: #ff0000; /* red */`
+* HSL表示 HSL (hue, saturation, and luminance) 色相饱和度亮度 `color: hsl(0, 100%, 50%); /* red */`
+
+### Size
+
+* em 为font-size的倍数
+* rem
+* percentage
+
+### URL
+
+`background-image: url(Images/pageBkg.png)`
+
+### 层叠顺序
+
+*越具体的选择器优先级越高, 优先级相同则根据选择*
+
+1. `!important` `p { color: blue !important; }`
+2. 内部样式 `<h1 style="color: green;">Heading</h1>`
+3. ID selector
+4. lass, attribute, or pseudo-selector
+5. element selectors
+6. universal selector
+
+
+
+数值计算计算方式:
+
+* A - the count of ID selectors
+* B - the count of class selectors, attributes selectors, and pseudo-classes
+* C - the count of type selectors and pseudo-elements
+
+```css
+/* A=0, B=0, C=0 -> specificity = 0 */
+*
+
+/* A=0, B=0, C=1 -> specificity = 1 */
+li
+
+/* A=0, B=0, C=2 -> specificity = 2 */
+ul li
+
+/* A=0, B=0, C=3 -> specificity = 3 */
+ul ol+li
+
+/* A=0, B=1, C=1 -> specificity = 11 */
+h1 + *[href$='http:']
+
+/* A=0, B=1, C=3 -> specificity = 13 */
+ul ol li.spec
+
+/* A=0, B=2, C=1 -> specificity = 21 */
+li.spec.next
+
+/* A=1, B=0, C=0 -> specificity = 100 */
+#myTag
+
+/* A=1, B=0, C=1 -> specificity = 101 */
+#yourTag:not(foo)
+```
+
+根据位置确定优先级:
+
+1. The first priority location is the `<style>` element in the head of the HTML document.
+2. The second priority location is a style sheet imported by an `@import` at-rule embedded within the `<style>` element
+3. The third priority location is a style sheet attached by a `<link>` element.
+4. The fourth priority location is a style sheet imported by an `@import` at-rule embedded within a style sheet attached by a `<link>` element.
+5. The fifth priority location is a style sheet attached by an end-user. An exception is made for `!important` rules in an end-user style sheet. These rules are given the highest priority.
+6. And last, the sixth (lowest) priority location is the default style sheet supplied by a browser.
+
+## Media
+
+跨设备渲染
+
+
+
+# 基本样式模式
+
+## Text formatting
+
+[Fundamental text and font styling](https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Fundamentals)
+
+* Font: color, font-family, font-size, font-style, font-weight, text-transform, text-decoration, text-shadow
+* Text layout: text-align, text-indent, line-height, letter-spacing, word-spacing
+
+[List style](https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Styling_lists)
+
+* list-style, list-style-image, list-style-position, list-style-type
+
+使用[web fonts](https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Web_fonts)
+
+```css
+@font-face {
+  font-family: "myFont";
+  src: url("myFont.woff");
+}
+html {
+  font-family: "myFont", "Bitstream Vera Serif", serif;
+}
+```
+
+### Box model
+
+
+
+
+
+
+
 
 
 
