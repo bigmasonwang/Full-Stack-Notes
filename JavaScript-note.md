@@ -78,12 +78,71 @@ console.log(new_object);
 - *Generator Function Expression*
   - *Named*: `function* function_name(Arg1,Arg2..){}`
   - *Anonymous*:`function* (Arg1,Arg2..){}`
-- *Arrow Function* 短
+- *Arrow Function* 简练
   - `var var_name = (Arg1, Arg2..) => {};`
 - *Function Constructor*
   - `var var_name = new Function(Arg1, Arg2..,'FunctionBodyString');`
 
 匿名函数(anonymous function) 在运行时被声明, 即定义与调用会同时进行
+
+### Arrow function
+
+考虑以下例子
+
+```javascript
+const students = [
+  { ID: 1, present: true},
+  { ID: 2, present: true},
+  { ID: 3, present: false}, 
+];
+
+// ES5 function
+const presentStudents = students.filter(function(student){return student.present;});
+
+// ES6 arrow function
+const presentStudents = students.filter(student => student.present);
+
+console.log(presentStudents);
+```
+
+上述例子中, 省略了`function`关键字; 在函数内部只有一个statement, 故省略了花括号; 只有一个parameter, 故省略了圆括号.
+
+### Higher-Order function
+
+函数可以赋值给变量, 也可作为参数传递(callback). 高阶函数是对其他函数进行操作的函数，操作可以是将它们作为参数，或者是返回它们。 简单来说，高阶函数是一个接收函数作为参数或将函数作为输出返回的函数。
+
+例如，Array.prototype.map，Array.prototype.filter 和 Array.prototype.reduce 是语言中内置的一些高阶函数。
+
+例子
+
+```javascript
+notSquared = [2,6,3,1];
+squared = notSquared.map(n => n*n); // [4,36,9,1]
+```
+
+## Class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
