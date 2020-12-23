@@ -246,6 +246,24 @@ react的component可以类比class, 定义一个组件, 可以有多个实例.
 
 ## React DOM
 
+React 的元素是不可变的, 创建元素后, 将无法更改其子元素或属性, 它表示特定时间的UI. 
+
+为了更新UI, 我们可以创建新的元素然后传递给`ReactDOM.render()`, 一个计时器的例子如下:
+
+```javascript
+function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  ReactDOM.render(element, document.getElementById('root'));
+}
+
+setInterval(tick, 1000);
+```
+
 
 
 
