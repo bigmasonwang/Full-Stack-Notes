@@ -63,7 +63,7 @@ my-app/
     logo.svg
 ```
 
-### JSX
+## JSX
 
 JSX将HTML和JavaScript混合, 看如下例子:
 
@@ -87,13 +87,164 @@ export default App;
 
 注意`htmlFor`对应的是HTML中的`for`属性, JSX替换了一些HTML内部属性,  这些属性以驼峰方式命名, 如 `className`取代了`class`, `onClick`取代了`onclick`.
 
-JSX的花括号中可以使用任意JavaScript表达式(expressions), 注意要与声明(statements)区分
+JSX的花括号中可以使用任意JavaScript表达式(expressions), 注意要与声明(statements)区分.
+
+## Lists in React
+
+通过JSX可以渲染一些简单的变量, 现在尝试渲染一个列表. 可以使用JavaScript的`map`方法:
+
+```javascript
+import React from 'react';
+
+const list = [
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: 'Jordan Walke',
+    num_comments: 3,
+    points: 4,
+    objectID: 0,
+  },
+  {
+    title: 'Redux',
+    url: 'https://redux.js.org/',
+    author: 'Dan Abramov, Andrew Clark',
+    num_comments: 2,
+    points: 5,
+    objectID: 1,
+  },
+];
 
 
+function App() {
+  return (
+    <div>
+    ...
+    <hr />
+    {
+      list.map(function(item) {
+      return (
+      <div key={item.objectID}>
+        <span>
+        <a href={item.url}>{item.title}</a>
+        </span>
+        <span>{item.author}</span>
+        <span>{item.num_comments}</span>
+        <span>{item.points}</span>
+      </div>
+      );
+  })}
+  </div>
+  );
+}
 
+export default App;
+```
 
+### key
 
+要注意的是, 列表中的每一个元素都应当有一个`key`属性. [比如](https://codepen.io/gaearon/pen/GjPyQr?editors=0011
 
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((numbers) =>
+  <li>{numbers}</li>
+);
+
+ReactDOM.render(
+  <ul>{listItems}</ul>,
+  document.getElementById('root')
+);
+```
+
+Console会有如下提示:
+
+```
+"Warning: Each child in a list should have a unique 'key' prop.
+```
+
+于是 我们加上`key`:
+
+```javascript
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById('root')
+);
+```
+
+`key`帮助React识别哪些项目已更改,添加或删除. 最好使用一个字符串来作为`key`, 通常是数据的ID, 没有ID的话用index, 但是如果列表项的顺序会发生更改, 则不建议用index作为`key`, 这会[影响性能](https://dev.to/jtonzing/the-significance-of-react-keys---a-visual-explanation--56l7)
+
+## Component
+
+上面的例子中`App()`与 `List()`杂糅在了一起, 现在将其分开:
+
+```javascript
+import React from 'react';
+
+const list = [
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: 'Jordan Walke',
+    num_comments: 3,
+    points: 4,
+    objectID: 0,
+  },
+  {
+    title: 'Redux',
+    url: 'https://redux.js.org/',
+    author: 'Dan Abramov, Andrew Clark',
+    num_comments: 2,
+    points: 5,
+    objectID: 1,
+  },
+];
+
+function App() {
+  return (
+    <div>
+			...
+      <List />
+    </div>
+  );
+}
+
+function List() {
+  return list.map(function(item) {
+    return (
+      <div key={item.objectID}>
+        <span>
+          <a href={item.url}>{item.title}</a>
+        </span>
+        <span>{item.author}</span>
+        <span>{item.num_comments}</span>
+        <span>{item.points}</span>
+      </div>
+    );
+  });
+}
+
+export default App;
+```
+
+react的component可以类比class, 定义一个组件, 可以有多个实例.
+
+在定义了一个组件之后, 可以把它当成HTML的`element`用在JSX里, 即被实例化.
+
+## React DOM
 
 
 
