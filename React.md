@@ -264,6 +264,59 @@ function tick() {
 setInterval(tick, 1000);
 ```
 
+## Event Handler
+
+一个例子:
+
+```javascript
+const App = () => {
+  const handleChange = event => {
+    console.log(event.target.value);
+  };
+
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" onChange={handleChange} />
+    </div>
+  );
+};
+```
+
+synthetic event 本质上是浏览器本地事件的包装, 有更多的功能, 防止本地浏览器的行为(如submit后的刷新)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
